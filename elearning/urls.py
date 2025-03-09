@@ -22,6 +22,7 @@ from users.views import UserViewSet
 from courses.views import CourseViewSet, LessonViewSet
 from enrollments.views import EnrollmentViewSet
 from progress.views import ProgressViewSet
+from quizzes.views import QuestionViewSet, SubmissionViewSet, QuizViewSet, AnswerViewSet
 
 
 router = DefaultRouter()
@@ -30,10 +31,16 @@ router.register(r'courses', CourseViewSet)
 router.register(r'lessons', LessonViewSet)
 router.register(r'enrollments', EnrollmentViewSet)
 router.register(r'progress', ProgressViewSet)
+router.register(r'quizzes', QuizViewSet)
+router.register(r'questions', QuestionViewSet)
+router.register(r'submissions', SubmissionViewSet)
+router.register(r'answer', AnswerViewSet)
+
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('', include(router.urls)),
+    
     
 ]
