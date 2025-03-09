@@ -21,6 +21,7 @@ from rest_framework.routers import DefaultRouter
 from users.views import UserViewSet
 from courses.views import CourseViewSet, LessonViewSet
 from enrollments.views import EnrollmentViewSet
+from progress.views import ProgressViewSet
 
 
 router = DefaultRouter()
@@ -28,6 +29,7 @@ router.register(r'users', UserViewSet)
 router.register(r'courses', CourseViewSet)
 router.register(r'lessons', LessonViewSet)
 router.register(r'enrollments', EnrollmentViewSet)
+router.register(r'progress', ProgressViewSet)
 
 
 urlpatterns = [
