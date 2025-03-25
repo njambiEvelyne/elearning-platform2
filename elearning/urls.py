@@ -41,6 +41,7 @@ router.register(r'answer', AnswerViewSet)
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('', include(router.urls)),
+    path("users", include('users.urls'))
     
     
 ]
