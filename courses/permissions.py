@@ -1,28 +1,23 @@
 from rest_framework import permissions
 
-class IsAdminOrInstructorOrReadOnly(permissions.BasePermission):
+class IsInstructorOrReadOnly(permissions.BasePermission):
     """
-    - Admins have full access.
-    - Instructors can create, update, and delete courses and lessons.
-    - Students can only view (read-only).
+    Custom permission to allow only instructors to edit courses and lessons.
+    Students can only view them.
     """
 
     def has_permission(self, request, view):
-        # Allow GET, HEAD, and OPTIONS for all users (read-only access)
+        # Allow all users to view (GET, HEAD, OPTIONS)
         if request.method in permissions.SAFE_METHODS:
             return True
-        # Allow full access to admins
-        if request.user.is_authenticated and request.user.is_staff:
-            return True
-        # Allow modification for instructors only
+        # Only allow instructors to create, edit, or delete
         return request.user.is_authenticated and request.user.role == "instructor"
 
     def has_object_permission(self, request, view, obj):
-        # Read permissions are allowed for any request
+        # Allow read-only access for all users
         if request.method in permissions.SAFE_METHODS:
             return True
-        # Admins can modify anything
-        if request.user.is_authenticated and request.user.is_staff:
-            return True
-        # Instructors can only modify their own courses/lessons
-        return request.user.is_authenticated and request.user.role == "instructor"
+        # Only the course instructor or admin can modify the object
+        return request.user.is_authenticated and (
+            request.user.role == "instructor" or request.user.is_staff
+        )

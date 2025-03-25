@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Instructor Dashboard</h2>
+<a href="{% url 'add_course' %}">Add New Course</a>
+
+<ul>
+    {% for course in courses %}
+        <li>{{ course.title }} - {{ course.description }}</li>
+    {% empty %}
+        <p>No courses added yet.</p>
+    {% endfor %}
+</ul>
+
+{% endblock %}
