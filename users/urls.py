@@ -1,12 +1,17 @@
 from django.urls import path
 from rest_framework_simplejwt.views import TokenRefreshView
 
-from .serializers import LoginView, RegisterUserView
-from .views import UserListView, UserDetailView
+from users.serializers import LoginView
+
+from .views import CustomLoginView, UserListView, UserDetailView, RegisterUserView  
+from django.contrib.auth.views import LoginView
+
 
 urlpatterns = [
     path('register/', RegisterUserView.as_view(), name='register'),
-    path('login/', LoginView.as_view(), name='login'),
+    #path('login/', CustomLoginView.as_view(), name='login'),  # Use CustomLoginView for login
+    path('login/', LoginView.as_view(template_name='users/login.html'), name='login'),  # Django login form
+
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('users/', UserListView.as_view(), name='user-list'),
     path('users/<int:pk>/', UserDetailView.as_view(), name='user-detail'),

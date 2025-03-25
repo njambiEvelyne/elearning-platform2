@@ -11,7 +11,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.password_validation import validate_password
 from rest_framework.permissions import AllowAny
 from .models import User
-from .serializers import UserSerializer
+from .serializers import LoginView, UserSerializer
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
 class UserViewSet(viewsets.ModelViewSet): 
@@ -56,9 +56,21 @@ class RegisterUserView(generics.CreateAPIView):
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.permissions import AllowAny
 
-class LoginView(TokenObtainPairView):
-    """Login view that returns access and refresh tokens"""
-    permission_classes = [AllowAny]
+from django.shortcuts import redirect
+from .forms import CustomLoginForm
+from django.contrib.auth.views import LoginView
+from .forms import CustomLoginForm
+
+class CustomLoginView(LoginView):
+    authentication_form = CustomLoginForm
+    template_name = "users/login.html"
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        extra_info = form.cleaned_data.get("extra_info")
+        # Process extra_info (e.g., save to session or log it)
+        self.request.session["extra_info"] = extra_info
+        return response
 
 from  users.custom_permissions import IsAdminUser 
 
