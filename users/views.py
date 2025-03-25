@@ -76,3 +76,32 @@ from  users.custom_permissions import IsAdminUser
 
 class SomeAdminView(generics.ListAPIView):
     permission_classes = [IsAdminUser]
+
+
+from django.contrib.auth import authenticate, login
+from django.http import JsonResponse
+from rest_framework.permissions import AllowAny
+from rest_framework.views import APIView
+
+class UserLoginView(APIView):
+    permission_classes = [AllowAny]  # Allow anyone to access this view
+
+    def post(self, request):
+        username = request.data.get("username")
+        password = request.data.get("password")
+        user = authenticate(username=username, password=password)
+
+        if user:
+            login(request, user)
+            return JsonResponse({"message": "Login successful"}, status=200)
+        return JsonResponse({"error": "Invalid credentials"}, status=400)
+
+
+
+from rest_framework.permissions import AllowAny
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
+@api_view(["POST"])
+@permission_classes([AllowAny])  # Allow anyone to login
+def login_view(request):
+    return Response({"message": "Login successful"})
