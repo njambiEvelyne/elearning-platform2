@@ -45,3 +45,21 @@ def add_course(request):
         form = CourseForm()
 
     return render(request, 'courses/add_course.html', {'form': form})
+
+
+@login_required
+def add_course(request):
+    if request.user.role != 'instructor':  # Restrict access
+        return redirect('instructor_dashboard')
+
+    if request.method == 'POST':
+        form = CourseForm(request.POST)
+        if form.is_valid():
+            course = form.save(commit=False)
+            course.instructor = request.user  # Set instructor as the creator
+            course.save()
+            return redirect('course_list')  # Redirect to courses page
+    else:
+        form = CourseForm()
+    
+    return render(request, 'courses/add_course.html', {'form': form})
