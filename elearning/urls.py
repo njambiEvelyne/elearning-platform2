@@ -41,8 +41,7 @@ router.register(r'answer', AnswerViewSet)
 
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="home.html"), name="home"),  # ✅ Ensure this is here
-
+    path("", TemplateView.as_view(template_name="home.html"), name="home"),  
     path("admin/", admin.site.urls),
     path('endpoints', include(router.urls)),
     path("users/", include('users.urls', namespace="users")),

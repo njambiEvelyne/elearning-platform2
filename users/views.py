@@ -83,3 +83,6 @@ def instructor_dashboard(request):
 @login_required
 def student_dashboard(request):
     return render(request, "users/student_dashboard.html")
+
+def home(request):
+    return render(request, "home.html")

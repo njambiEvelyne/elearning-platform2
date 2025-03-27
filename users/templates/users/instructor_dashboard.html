@@ -3,6 +3,54 @@
 {% block title %}Instructor Dashboard{% endblock %}
 
 {% block content %}
-<h2>Welcome, Instructor!</h2>
-<p>Manage your courses and interact with students.</p>
+<style>
+    body {
+        background: url('/static/images/book_background.jpg') no-repeat center center fixed;
+        background-size: cover;
+        color: white; /* Ensures text is readable */
+    }
+    .dashboard-container {
+        background-color: rgba(50, 205, 50, 0.9); /* Luminous green with slight transparency */
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 600px;
+        margin: auto;
+        text-align: center;
+    }
+    .comment-box {
+        background-color: white;
+        padding: 15px;
+        border-radius: 8px;
+        color: black;
+    }
+    .btn-submit {
+        background-color: limegreen;
+        color: white;
+        border: none;
+        padding: 10px;
+        width: 100%;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    .btn-submit:hover {
+        background-color: darkgreen;
+    }
+</style>
+
+<div class="dashboard-container">
+    <h2>Welcome, Instructor! 📚</h2>
+    <p>Manage your courses and interact with students.</p>
+
+    <!-- Comment Section -->
+    <div class="comment-box">
+        <h3>Leave a Comment</h3>
+        <form method="post">
+            {% csrf_token %}
+            <textarea name="comment" rows="4" class="form-control" placeholder="Share your thoughts..." required></textarea>
+            <br>
+            <button type="submit" class="btn-submit">Submit</button>
+        </form>
+    </div>
+</div>
+
 {% endblock %}
