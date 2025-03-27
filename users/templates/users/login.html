@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base.html" %}  
 
 {% block title %}Login{% endblock %}
 
@@ -8,60 +8,113 @@
         background: url('/static/images/library_background.jpg') no-repeat center center fixed;
         background-size: cover;
         color: white; /* Ensures text is readable */
+        font-family: 'Arial', sans-serif;
     }
+
     .container {
         max-width: 600px;
         margin: auto;
-        padding: 30px;
+        padding: 40px;
         background-color: rgba(0, 0, 0, 0.7); /* Transparent black background */
-        border-radius: 10px;
+        border-radius: 15px;
         color: white;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
     }
+
+    h2 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
     .tabs {
         display: flex;
         justify-content: space-around;
         margin-bottom: 20px;
     }
+
     .tab-button {
-        padding: 10px 20px;
+        padding: 12px 25px;
         background-color: #32CD32; /* Luminous Green */
         color: white;
         border: none;
         cursor: pointer;
-        border-radius: 5px;
-        transition: background-color 0.3s;
+        border-radius: 8px;
+        font-size: 1.1em;
+        transition: background-color 0.3s ease, transform 0.3s ease;
     }
+
     .tab-button:hover {
         background-color: darkgreen;
+        transform: scale(1.05);
     }
-    .tab-content {
-        display: none;
-    }
-    .tab-content.active {
-        display: block;
-    }
+
     .tab-button:focus {
         outline: none;
     }
+
+    .tab-content {
+        display: none;
+    }
+
+    .tab-content.active {
+        display: block;
+    }
+
     .form-container {
         padding-top: 20px;
     }
+
+    .form-container input,
+    .form-container button {
+        padding: 12px;
+        border-radius: 8px;
+        margin-top: 10px;
+        font-size: 1.1em;
+        border: none;
+    }
+
+    .form-container input {
+        width: 100%;
+        background-color: #f4f4f4;
+        margin-bottom: 15px;
+    }
+
+    .form-container input:focus {
+        background-color: white;
+        border: 2px solid #32CD32;
+    }
+
     button {
         background-color: limegreen;
         color: white;
-        border: none;
-        padding: 10px;
-        width: 100%;
         cursor: pointer;
-        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
     }
+
     button:hover {
         background-color: darkgreen;
+        transform: scale(1.05);
+    }
+
+    .register-link {
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .register-link a {
+        color: #32CD32;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .register-link a:hover {
+        text-decoration: underline;
     }
 </style>
 
 <div class="container">
-    <h2 class="text-center">Login</h2>
+    <h2>Login</h2>
 
     <!-- Tabs for Library and Student Resources -->
     <div class="tabs">
@@ -87,7 +140,11 @@
             {{ form.as_p }}
             <button type="submit">Login</button>
         </form>
-        <p class="text-center mt-2">Don't have an account? <a href="{% url 'users:register' %}">Register here</a></p>
+        
+        <!-- Register Link -->
+        <div class="register-link">
+            <p>Don't have an account? <a href="{% url 'users:register' %}">Register here</a></p>
+        </div>
     </div>
 </div>
 
