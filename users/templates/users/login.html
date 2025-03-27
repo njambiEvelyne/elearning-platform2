@@ -1,15 +1,104 @@
-{% extends "base.html" %}  
+{% extends "base.html" %}
 
 {% block title %}Login{% endblock %}
 
 {% block content %}
+<style>
+    body {
+        background: url('/static/images/library_background.jpg') no-repeat center center fixed;
+        background-size: cover;
+        color: white; /* Ensures text is readable */
+    }
+    .container {
+        max-width: 600px;
+        margin: auto;
+        padding: 30px;
+        background-color: rgba(0, 0, 0, 0.7); /* Transparent black background */
+        border-radius: 10px;
+        color: white;
+    }
+    .tabs {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 20px;
+    }
+    .tab-button {
+        padding: 10px 20px;
+        background-color: #32CD32; /* Luminous Green */
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    .tab-button:hover {
+        background-color: darkgreen;
+    }
+    .tab-content {
+        display: none;
+    }
+    .tab-content.active {
+        display: block;
+    }
+    .tab-button:focus {
+        outline: none;
+    }
+    .form-container {
+        padding-top: 20px;
+    }
+    button {
+        background-color: limegreen;
+        color: white;
+        border: none;
+        padding: 10px;
+        width: 100%;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    button:hover {
+        background-color: darkgreen;
+    }
+</style>
+
 <div class="container">
-    <h2>Login</h2>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-    </form>
-    <p>Don't have an account? <a href="{% url 'users:register' %}">Register here</a></p>
+    <h2 class="text-center">Login</h2>
+
+    <!-- Tabs for Library and Student Resources -->
+    <div class="tabs">
+        <button class="tab-button" onclick="showTab('library')">Library</button>
+        <button class="tab-button" onclick="showTab('student')">Student Resources</button>
+    </div>
+
+    <!-- Tab Content -->
+    <div id="library" class="tab-content">
+        <h3>Library Access</h3>
+        <p>Login to access the library and browse available books.</p>
+    </div>
+
+    <div id="student" class="tab-content active">
+        <h3>Student Resources</h3>
+        <p>Login to access your student resources and course materials.</p>
+    </div>
+
+    <!-- Login Form -->
+    <div class="form-container">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Login</button>
+        </form>
+        <p class="text-center mt-2">Don't have an account? <a href="{% url 'users:register' %}">Register here</a></p>
+    </div>
 </div>
+
+<script>
+    function showTab(tabName) {
+        var tabs = document.querySelectorAll('.tab-content');
+        tabs.forEach(function(tab) {
+            tab.classList.remove('active');
+        });
+        document.getElementById(tabName).classList.add('active');
+    }
+</script>
+
 {% endblock %}

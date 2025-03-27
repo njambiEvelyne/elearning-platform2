@@ -1,51 +1,131 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to eLearning Portal</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #6a11cb, #2575fc);
-            color: white;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-        }
-        h1 {
-            font-size: 3rem;
-        }
-        p {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-        }
-        .btn {
-            display: inline-block;
-            background: #ffcc00;
-            color: black;
-            padding: 15px 25px;
-            text-decoration: none;
-            font-size: 1.2rem;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-        .btn:hover {
-            background: #ffaa00;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Welcome to eLearning Portal</h1>
-        <p>Your gateway to quality education. Learn, grow, and achieve your dreams with our platform.</p>
-        <p>Explore courses, track progress, and engage with instructors.</p>
-        <a href="/users/login/" class="btn">Get Started</a>
+{% extends 'base.html' %}
+
+{% block title %}Welcome to the eLearning Portal{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #f4f8fb;
+        font-family: Arial, sans-serif;
+        color: #333;
+    }
+    .hero-section {
+        position: relative;
+        background-color: white;  /* White background for the hero section */
+        color: #333;  /* Dark text for contrast */
+        text-align: center;
+        padding: 100px 0;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    }
+    .hero-section h1 {
+        font-size: 4em;  /* Larger font size for the header */
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #2C8F4A; /* Eye-catching green color */
+    }
+    .hero-section p {
+        font-size: 1.6em;
+        color: #555;  /* Light grey color for the paragraph text */
+        margin-top: 10px;
+    }
+    .feature-section {
+        display: flex;
+        justify-content: space-around;
+        padding: 40px 0;
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .feature-card {
+        width: 30%;
+        text-align: center;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .feature-card img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+    .feature-card h3 {
+        margin-top: 15px;
+        color: #32CD32;
+    }
+    .feature-card p {
+        color: #555;
+    }
+    .cta-section {
+        background-color: #32CD32;
+        color: white;
+        text-align: center;
+        padding: 50px 0;
+    }
+    .cta-section h2 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+    }
+    .cta-section a {
+        background-color: white;
+        color: #32CD32;
+        padding: 10px 20px;
+        font-size: 1.2em;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .cta-section a:hover {
+        background-color: #28a745;
+        color: white;
+    }
+    .footer {
+        background-color: #222;
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+    }
+    .footer a {
+        color: #32CD32;
+        text-decoration: none;
+    }
+    .footer a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <h1>Welcome to the eLearning Portal</h1>
+    <p>Your gateway to knowledge and learning.</p>
+</section>
+
+<!-- Feature Section -->
+<section class="feature-section">
+    <div class="feature-card">
+        <img src="/static/images/library.jpg" alt="Library">
+        <h3>Access a Wide Library</h3>
+        <p>Explore a vast collection of books, courses, and materials to help you succeed.</p>
     </div>
-</body>
-</html>
+    <div class="feature-card">
+        <img src="/static/images/courses.jpg" alt="Courses">
+        <h3>Enroll in Courses</h3>
+        <p>Learn from expert instructors in a variety of fields and disciplines.</p>
+    </div>
+    <div class="feature-card">
+        <img src="/static/images/community.jpg" alt="Community">
+        <h3>Join Our Community</h3>
+        <p>Engage with fellow learners and instructors to enhance your learning experience.</p>
+    </div>
+</section>
+
+<!-- Call-to-Action Section -->
+<section class="cta-section">
+    <h2>Ready to Begin Your Journey?</h2>
+    <a href="{% url 'users:register' %}">Sign Up Now</a>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <p>© 2025 eLearning Portal | <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a></p>
+</footer>
+
+{% endblock %}
