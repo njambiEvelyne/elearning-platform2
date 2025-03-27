@@ -18,16 +18,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from users.views import UserViewSet
-from courses.views import CourseViewSet, LessonViewSet
+from courses.views import CourseViewSet,LessonViewSet
 from enrollments.views import EnrollmentViewSet
 from progress.views import ProgressViewSet
 from quizzes.views import QuestionViewSet, SubmissionViewSet, QuizViewSet, AnswerViewSet
+from users.views import UserViewset
+from django.views.generic import TemplateView
+
 
 
 router = DefaultRouter()
-router.register(r'users', UserViewSet)
-router.register(r'courses', CourseViewSet)
+router.register(r'users', UserViewset)
+router.register(r'courses', CourseViewSet, basename='course')
 router.register(r'lessons', LessonViewSet)
 router.register(r'enrollments', EnrollmentViewSet)
 router.register(r'progress', ProgressViewSet)
@@ -39,9 +41,11 @@ router.register(r'answer', AnswerViewSet)
 
 
 urlpatterns = [
+    path("", TemplateView.as_view(template_name="home.html"), name="home"),  # ✅ Ensure this is here
+
     path("admin/", admin.site.urls),
-    path('', include(router.urls)),
-    path("users", include('users.urls')),
+    path('endpoints', include(router.urls)),
+    path("users/", include('users.urls', namespace="users")),
     path('api-auth/', include('rest_framework.urls')),
     path("courses/", include('courses.urls'))  ,
     

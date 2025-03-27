@@ -8,7 +8,9 @@ class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
     permission_classes = [IsAuthenticated, IsInstructorOrReadOnly]
-
+    def list(self, request, *args, **kwargs):
+        print("Queryset:", self.queryset)  # Debugging line
+        return super().list(request, *args, **kwargs)
 
 class LessonViewSet(viewsets.ModelViewSet):
     queryset = Lesson.objects.all()

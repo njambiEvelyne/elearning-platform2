@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Redirecting to your dashboard...</h2>
+  <meta http-equiv="refresh" content="1;url={% url 'users:dashboard_redirect' %}">
+{% endblock %}

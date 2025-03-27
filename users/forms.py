@@ -1,6 +1,17 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
+from .models import User 
 
-class CustomLoginForm(AuthenticationForm):
-    extra_info = forms.CharField(max_length=100, required=False, help_text="Enter additional details")
+class CustomUserCreationForm(UserCreationForm):
+    email = forms.EmailField(required=True)
 
+    class Meta:
+        model = User  
+        fields = ["username", "email", "role", "profile_photo", "date_of_birth", "password1", "password2"]
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.email = self.cleaned_data["email"]
+        if commit:
+            user.save()
+        return user
