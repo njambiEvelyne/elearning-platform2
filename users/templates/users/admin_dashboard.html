@@ -3,17 +3,146 @@
 {% block title %}Admin Dashboard{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2 class="text-center">Welcome to the Admin Dashboard</h2>
+<!-- Custom CSS -->
+<style>
+    /* Background */
+    .dashboard-container {
+        display: flex;
+        height: 100vh;
+        background: linear-gradient(to right, #4A90E2, #50E3C2);
+        color: #fff;
+    }
 
-    <h2>Welcome, Admin!</h2>
-<p>Manage users, courses, and settings here.</p>
+    /* Sidebar */
+    .sidebar {
+        width: 250px;
+        background: #2C3E50;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
 
-    <div class="text-center mt-3">
-        <a href="{% url 'users:login' %}" class="btn" style="background-color: #32CD32; color: white; padding: 10px 20px; border-radius: 5px; font-weight: bold; text-decoration: none;">
-            Login
-        </a>
+    .sidebar h3 {
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #ECF0F1;
+    }
+
+    .sidebar a {
+        display: block;
+        padding: 12px;
+        margin: 8px 0;
+        color: #ECF0F1;
+        text-decoration: none;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: bold;
+        transition: 0.3s;
+        background: #34495E;
+    }
+
+    .sidebar a:hover {
+        background: #16A085;
+        transform: scale(1.05);
+    }
+
+    /* Main Content */
+    .dashboard-content {
+        flex-grow: 1;
+        padding: 40px;
+        text-align: center;
+    }
+
+    .welcome-text {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    /* Cards */
+    .card-container {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 30px;
+    }
+
+    .card {
+        width: 250px;
+        padding: 20px;
+        background: white;
+        color: #2C3E50;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        transition: 0.3s;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+    .card i {
+        font-size: 40px;
+        margin-bottom: 10px;
+        color: #16A085;
+    }
+
+    /* Footer */
+    .dashboard-footer {
+        text-align: center;
+        padding: 10px;
+        background: #2C3E50;
+        color: white;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+</style>
+
+<div class="dashboard-container">
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <h3>Admin Panel</h3>
+        <a href="{% url 'users:login' %}"><i class="fas fa-sign-in-alt"></i> Login</a>
+        <a href="{% url 'users:logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="dashboard-content">
+        <div class="welcome-text">Welcome to the Admin Dashboard</div>
+        <p>Manage users, courses, and settings efficiently with ease.</p>
+
+        <!-- Admin Feature Cards -->
+        <div class="card-container">
+            <div class="card">
+                <i class="fas fa-user-plus"></i>
+                <h4>Add User</h4>
+                <p>Register new users and assign roles.</p>
+            </div>
+
+            <div class="card">
+                <i class="fas fa-user-times"></i>
+                <h4>Delete User</h4>
+                <p>Remove inactive or unauthorized accounts.</p>
+            </div>
+
+            <div class="card">
+                <i class="fas fa-cogs"></i>
+                <h4>Manage Settings</h4>
+                <p>Customize platform settings easily.</p>
+            </div>
+        </div>
     </div>
 </div>
-{% endblock %}
 
+<!-- Footer -->
+<div class="dashboard-footer">
+    &copy; 2025 eLearning Platform | Admin Dashboard
+</div>
+
+<!-- FontAwesome Icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+{% endblock %}

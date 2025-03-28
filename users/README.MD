@@ -27,3 +27,24 @@ The root api endpoints have been set up and are well running. The endpoints are 
     answer's endpoint
     
 
+There are various functionalities for te platform: 
+   To access all the endpoints for the apps ie; general endpoints, browse using this url: http://127.0.0.1:8000/api/ It gives a list of all the endpoints included in the platform
+
+   To access users app, use the following urls whereby there are other accessible endpoints inside the users app
+
+        To allow for login use this url: http://127.0.0.1:8000/users/login/
+
+        To register: http://127.0.0.1:8000/users/register/
+
+    
+    The app also has dashbords that get to redirect users according to their roles. The roles are for the admin, instructor as well as the students.
+
+
+    The admin has been accorded all the previledges, they can add users, lessons, courses, remove/delete users and also manage the students
+
+    The instructor can add lessons, courses, as well as give assignments to be worked on
+
+    The students can only read from the platform. The dashboard also gives them an opportunity to leave their opinions, improvements as well as experience they have with the platform
+
+Each of the users have their respective dashboards: 
+    Admin-dashboard url: 

@@ -11,7 +11,8 @@ The model handles the various courses as there are many courses in an institutio
 class Course(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    instructor = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'role': 'instructor'})
+    instructor = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, limit_choices_to={'role': 'instructor'})
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
