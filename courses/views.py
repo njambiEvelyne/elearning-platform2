@@ -1,3 +1,4 @@
+from django.views import View
 from rest_framework import viewsets
 from .permissions import IsInstructorOrReadOnly
 from .models import Course, Enrollment, Lesson
@@ -21,6 +22,11 @@ class LessonViewSet(viewsets.ModelViewSet):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
     permission_classes = [IsAuthenticated, IsInstructorOrReadOnly]
+
+class CourseDetailView(View):
+    def get(self, request, course_id):
+        course = get_object_or_404(Course, id=course_id)
+        return render(request, "courses/course_detail.html", {"course": course})
 
 
 from django.shortcuts import get_object_or_404, render, redirect

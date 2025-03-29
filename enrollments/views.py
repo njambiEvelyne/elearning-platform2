@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect
 from rest_framework import viewsets
 
@@ -15,8 +16,17 @@ class EnrollmentViewSet(viewsets.ModelViewSet):
 @login_required
 def enroll_course(request, course_id):
     course = get_object_or_404(Course, id=course_id)
+    student = request.user
 
     if not Enrollment.objects.filter(student=request.user, course=course).exists():
-        Enrollment.objects.create(student=request.user, course=course)  
+        Enrollment.objects.create(student=request.user, course=course) 
+    
+    if Enrollment.objects.filter(student=student, course=course).exists():
+        messages.warning(request, "You are already enrolled in this course.")
+    else:
+        Enrollment.objects.create(student=student, course=course)
+        messages.success(request, "Successfully enrolled in the course!")
 
-    return redirect('student_dashboard')  # 🔄 Redirect back to dashboard
+
+    return redirect("courses:course_detail", course_id=course.id)
+   

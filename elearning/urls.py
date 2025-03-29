@@ -28,7 +28,10 @@ urlpatterns = [
     path("api/", include(router.urls)),  
     path("api-auth/", include("rest_framework.urls")), 
 
-    # Include users and courses with namespaces
+    
     path("users/", include("users.urls", namespace="users")),  
-    path("courses/", include("courses.urls", namespace="courses")),  # FIX: Register courses with namespace
+    path("courses/", include("courses.urls", namespace="courses")),  
+
+    path('enrollments/', include('enrollments.urls')), 
+
 ]

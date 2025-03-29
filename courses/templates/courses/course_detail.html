@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="course-container">
+    <div class="course-header">
+        <h2>{{ course.title }}</h2>
+    </div>
+
+    <div class="course-content">
+        <p class="description">{{ course.description }}</p>
+
+        <div class="course-info">
+            <p><i class="fas fa-chalkboard-teacher"></i> <strong>Instructor:</strong> {{ course.instructor }}</p>
+            <p><i class="far fa-clock"></i> <strong>Duration:</strong> {{ course.duration }} hours</p>
+        </div>
+
+        <a href="{% url 'enrollments:enroll_course' course.id %}" class="enroll-btn">🎓 Enroll Now</a>
+    </div>
+</div>
+
+<style>
+    /* General container styling */
+    .course-container {
+        max-width: 850px;
+        margin: 40px auto;
+        background: linear-gradient(135deg, #ffffff, #f3f3f3);
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        transition: transform 0.3s ease-in-out;
+    }
+    .course-container:hover {
+        transform: scale(1.02);
+    }
+
+    /* Course title */
+    .course-header h2 {
+        font-size: 32px;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Course description */
+    .description {
+        font-size: 18px;
+        color: #555;
+        line-height: 1.7;
+        margin-bottom: 25px;
+        padding: 0 20px;
+    }
+
+    /* Course information section */
+    .course-info {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin-bottom: 25px;
+    }
+
+    .course-info p {
+        font-size: 18px;
+        font-weight: bold;
+        color: #34495e;
+        background: #ecf0f1;
+        padding: 10px 15px;
+        border-radius: 8px;
+        display: inline-block;
+        transition: 0.3s ease-in-out;
+    }
+
+    .course-info p i {
+        margin-right: 8px;
+        color: #3498db;
+    }
+
+    /* Enroll button */
+    .enroll-btn {
+        display: inline-block;
+        padding: 15px 30px;
+        background: #3498db;
+        color: #fff;
+        font-size: 20px;
+        font-weight: bold;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: 0.3s ease-in-out;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .enroll-btn:hover {
+        background: #2980b9;
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .course-info {
+            flex-direction: column;
+            align-items: center;
+        }
+        .course-info p {
+            margin-bottom: 10px;
+            width: 80%;
+        }
+    }
+</style>
+
+{% endblock %}
