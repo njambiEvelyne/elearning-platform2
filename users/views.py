@@ -30,9 +30,10 @@ class CustomLoginView(LoginView):
     template_name = "users/login.html"
 
     def form_valid(self, form):
-        user = form.get_user()
-        login(self.request, user)
-        return redirect(reverse("dashboard_redirect"))
+        user = form.save()
+        login(self.request, user)  # Log in user after registration
+        messages.success(self.request, "Account created successfully!")
+        return redirect("dashboard_redirect")  # Redirect to their specific dashboard
 
     def form_invalid(self, form):
         messages.error(self.request, "Invalid username or password.")
