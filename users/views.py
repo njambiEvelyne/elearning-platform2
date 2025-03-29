@@ -8,7 +8,7 @@ from django.views.generic import CreateView
 from django.contrib import messages
 from django.urls import reverse_lazy, reverse
 from .models import User
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, UserCreationForm
 
 class UserViewset(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -79,10 +79,34 @@ def admin_dashboard(request):
 def instructor_dashboard(request):
     return render(request, "users/instructor_dashboard.html")
 
+from courses.models import Course
 
 @login_required
 def student_dashboard(request):
-    return render(request, "users/student_dashboard.html")
+    enrolled_courses = Course.objects.filter(enrolled_students__student=request.user)
+    available_courses = Course.objects.exclude(enrolled_students__student=request.user)
+
+    return render(request, 'users/student_dashboard.html', {
+        'enrolled_courses': enrolled_courses,
+        'available_courses': available_courses,
+    })
+
 
 def home(request):
     return render(request, "home.html")
+
+
+@login_required
+def add_user(request):
+    if not request.user.is_superuser:  # Ensure only superusers can access
+        return redirect("admin_dashboard")  # Redirect to admin panel instead of home
+
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("admin_dashboard")  
+    else:
+        form = UserCreationForm()
+
+    return render(request, "users/add_user.html", {"form": form})

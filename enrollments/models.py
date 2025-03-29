@@ -4,7 +4,7 @@ from courses.models import Course
 
 class Enrollment(models.Model):
     student = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'role': 'student'})
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, related_name="enrollment" ,on_delete=models.CASCADE)
     enrolled_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

@@ -1,7 +1,7 @@
 from django.urls import path, reverse_lazy
 from django.contrib.auth.views import LogoutView
 from .views import (
-    CustomLoginView, RegisterUserView, dashboard_redirect,
+    CustomLoginView, RegisterUserView, add_user, dashboard_redirect,
     admin_dashboard, instructor_dashboard, student_dashboard
 )
 
@@ -22,4 +22,7 @@ urlpatterns = [
     path("instructor/dashboard/", instructor_dashboard, name="instructor_dashboard"),
 
     path("student/dashboard/", student_dashboard, name="student_dashboard"),
+
+    path("add-user/", add_user, name="add_user"),
+
 ]

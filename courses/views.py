@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from .permissions import IsInstructorOrReadOnly
-from .models import Course, Lesson
+from .models import Course, Enrollment, Lesson
 from .serializers import CourseSerializer, LessonSerializer
 from rest_framework.permissions import IsAuthenticated
 import logging  
@@ -23,7 +23,7 @@ class LessonViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated, IsInstructorOrReadOnly]
 
 
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Course
 from .forms import CourseForm  
@@ -54,3 +54,25 @@ def add_course(request):
         form = CourseForm()
     
     return render(request, 'courses/add_course.html', {'form': form})
+
+@login_required
+def student_dashboard(request):
+    """Display courses available for students or the ones they are enrolled in"""
+    
+    if request.user.role != 'student':  # Ensure only students can access
+        return redirect('home')
+
+    # Show only courses the student is enrolled in
+    enrolled_courses = Course.objects.filter(enrollment__student=request.user)
+
+    return render(request, 'students/student_dashboard.html', {'courses': enrolled_courses})
+
+@login_required
+def enroll_course(request, course_id):
+    course = get_object_or_404(Course, id=course_id)
+    enrollment, created = Enrollment.objects.get_or_create(user=request.user, course=course)
+    
+    if created:
+        return redirect('student_dashboard')  
+    else:
+        return redirect('course_detail', course_id=course.id)

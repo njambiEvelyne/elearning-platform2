@@ -105,6 +105,8 @@
     <!-- Sidebar Navigation -->
     <div class="sidebar">
         <h3>Admin Panel</h3>
+        <a href="{% url 'users:add_user' %}"><i class="btn btn-primary"></i> Add User</a>
+
         <a href="{% url 'users:login' %}"><i class="fas fa-sign-in-alt"></i> Login</a>
         <a href="{% url 'users:logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>

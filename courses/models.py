@@ -12,7 +12,6 @@ class Course(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     instructor = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, limit_choices_to={'role': 'instructor'})
-
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -32,3 +31,8 @@ class Lesson(models.Model):
 
     def __str__(self):
         return self.title
+
+class Enrollment(models.Model):
+    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name="enrollments")
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="enrolled_students")  # Important: Use a related_name
+    enrolled_at = models.DateTimeField(auto_now_add=True)
