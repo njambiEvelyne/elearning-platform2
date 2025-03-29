@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from rest_framework import viewsets
 
 from courses.models import Course
@@ -7,6 +7,8 @@ from .models import Enrollment
 from .serializers import EnrollmentSerializer
 
 from django.contrib.auth.decorators import login_required
+
+from .forms import EnrollmentForm
 
 
 class EnrollmentViewSet(viewsets.ModelViewSet):
@@ -23,7 +25,19 @@ def enroll_course(request, course_id):
     
     if Enrollment.objects.filter(student=student, course=course).exists():
         messages.warning(request, "You are already enrolled in this course.")
+        return redirect("users:student_dashboard")
+
+    if form.is_valid():
+            enrollment = form.save(commit=False)
+            enrollment.student = request.user  # Assign the logged-in user
+            enrollment.course = course  # Assign the selected course
+            enrollment.save()
+            messages.success(request, "Enrollment successful!")
+            return redirect("users:student_dashboard")  # Redirect to dashboard
     else:
+        form = EnrollmentForm(initial={"email": request.user.email})
+
+        else:
         Enrollment.objects.create(student=student, course=course)
         messages.success(request, "Successfully enrolled in the course!")
 
