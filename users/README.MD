@@ -47,4 +47,64 @@ There are various functionalities for te platform:
     The students can only read from the platform. The dashboard also gives them an opportunity to leave their opinions, improvements as well as experience they have with the platform
 
 Each of the users have their respective dashboards: 
-    Admin-dashboard url: 
+    Admin-dashboard url: http://127.0.0.1:8000/users/admin/dashboard/
+
+    Instructor-dashboard url: http://127.0.0.1:8000/users/instructor/dashboard/
+
+    Student-dashboard url: http://127.0.0.1:8000/users/student/dashboard/
+
+
+In the student dashbord, there is a list of the available courses and allows for them to enroll as well as get the details of the course when they get to click on the enroll button
+
+HANDLED APPS:
+ 1. users app
+    This app is responsible for handling users. It is in this app that login, registartion and template display is handled
+
+    Databases:
+        The table is the user's table- It has the following records/attributes/fields:
+            1. role field: This is for the various accorded roles; admin, instructor, student
+            2. profile picture filed: It alllows for the users to add a profile photo for their accounts. Though it is optional to have a profile photo or not
+            3. Date_of_birth: Takes the date of birth for the user
+
+        Templates:
+        There are several templates in this app:     
+            1. add_user.html - Thsi is linked with the admin's dashboard where they can add users as they have overall previledges
+            2. admin_dashboard.html- This template is the one that creates the frontend dashboard for the admin
+            3. student_dashboard.html- The establisher of the students dashboard. It jas been linked with another template in the enrollments app
+            4. instructor_dashboard.html- The builder of the instructor's dashboard in the frontend
+            5. login.html- This handles the login functionality in the front end. THis is for the users that have an account in the platform
+            6. register.html- Thistemplate enables the users to create an account in the platform
+            7. dashbord_redirect.html- Menat for redirection. It also has the dashboard and logout redirects
+    
+The users have also been registered in the backend so that they can be accessed by the admins and the created superuser
+
+
+
+
+
+
+
+
+2. Enrollments app
+    This is the app that deals with the enrollment role for the students
+     
+     Database- The fields present in this app's model are:
+        1. student field which is a foreign key
+        2. limit choices This ensures that only the students can enroll for courses
+        3. course field. It is a foreign key that relates with the course in the courses app
+        enrolled at field: This keeps the record of the when the students was enrolled
+
+    Templates
+        There is an enroll_form template in this directory. It is for collecting the student information before enrolling for a particular course
+
+    Urls
+        The url paths for this app are in the urls.py file 
+        It has the enrollment link that is linked with the template to allow for data collection
+
+
+
+
+
+
+
+
