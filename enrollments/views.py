@@ -35,4 +35,16 @@ def enroll_course(request, course_id):
     else:
         form = EnrollmentForm(initial={"email": student.email})
 
-    return render(request, "enrollments/enroll.html", {"form": form, "course": course})
+    return render(request, "enrollments/enroll_form.html", {"form": form, "course": course})
+
+from django.http import JsonResponse
+from django.core.paginator import Paginator
+
+def enrollments_list(request):
+    enrollments = Enrollment.objects.select_related("student").all()  
+    paginator = Paginator(enrollments, 10) 
+    page_number = request.GET.get("page", 1)
+    page_obj = paginator.get_page(page_number)
+
+    data = [{"id": e.id, "student": e.student.username} for e in page_obj]
+    return JsonResponse({"enrollments": data})

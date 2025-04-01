@@ -64,7 +64,8 @@ INSTALLED_APPS = [
     "enrollments",
     "progress",
     "quizzes",
-    "rest_framework.authtoken"
+    "rest_framework.authtoken",
+    "corsheaders",
 ]
 """
 Enables the users to login
@@ -90,7 +91,12 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True  
+
 
 ROOT_URLCONF = "elearning.urls"
 
@@ -108,7 +114,11 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [os.path.join(BASE_DIR / "elearning","templates"),#Global template, base.html
-                 os.path.join(BASE_DIR, "users", template)#users app templates
+                 #users app templates
+                 os.path.join(BASE_DIR, "users", "template"),
+                
+                #Enrollment app templates
+                 os.path.join(BASE_DIR, "enrollments", "templates"),
                  
                  ],
         "APP_DIRS": True,
