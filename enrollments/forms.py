@@ -1,7 +1,6 @@
 from django import forms
-from .models import Enrollment
 
-class EnrollmentForm(forms.ModelForm):
-    class Meta:
-        model = Enrollment
-        fields = ["full_name", "email", "phone_number"]  # Fields to collect from student
+class EnrollmentForm(forms.Form):
+    full_name = forms.CharField(max_length=255)
+    email = forms.EmailField()
+    phone_number = forms.CharField(max_length=15, required=False)
