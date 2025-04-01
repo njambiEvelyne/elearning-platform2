@@ -77,6 +77,20 @@ HANDLED APPS:
             7. dashbord_redirect.html- Menat for redirection. It also has the dashboard and logout redirects
     
 The users have also been registered in the backend so that they can be accessed by the admins and the created superuser
+        URLS:
+            The urls to various pathas have been registered in the urls.py file in the users app
+            It has the path to :
+                a)main dashboard
+                b)students dashboard-http://127.0.0.1:8000/users/student/dashboard/
+                c)instructor's dashboard- http://127.0.0.1:8000/users/instructor/dashboard/
+                d)admin's dashboard- http://127.0.0.1:8000/users/admin/dashboard/
+                e)login- http://127.0.0.1:8000/users/login/
+                f)logout
+                g)register- http://127.0.0.1:8000/users/register/
+                h)add user- This is under the admin's dashboard
+                
+
+
 
 
 
