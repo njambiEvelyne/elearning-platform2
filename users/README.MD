@@ -88,7 +88,7 @@ The users have also been registered in the backend so that they can be accessed 
                 f)logout
                 g)register- http://127.0.0.1:8000/users/register/
                 h)add user- This is under the admin's dashboard
-                
+
 
 
 
@@ -118,6 +118,91 @@ The users have also been registered in the backend so that they can be accessed 
 
 
 
+3. Courses app
+This is the app that I accorded the role for handling issues pertaining the courses
+Courses and the lessons have been registered for accesibility in the backend
+Courses can be added by an instructor who is added by the admin
+The instructor takes upmthe role for adding courses ans the lessons for thecourses they'll be tutoring
+
+Databases:
+The database has three tables, that is;
+    1. Course table
+    This table has the following fields and their respective relationships
+        1. title:Takes the title for the added course
+        2. description: A textfield where a descrption on the cours is given
+        3. instructor field: This is a foreign field which relates with the user's table in te users app. The relationship is meant to ensure the course is associated with the appropriate instructor
+        4. created at: This field records the time a course was added in the platform
+
+    2. Lesson table
+    This is the table to handle the lessons for a particular course. Below are the fields in the table and their relationships
+        1. course: This is a foreign field that uis related with the coures field in the courses table
+        2. title: A textfield to add the title for the lesson that has been added 
+        3. video_url: This is a URLfield where the instructor can add the url for a totour video that they have they have created. Though this field is not a must filed field, it can be left empty
+        4. created-at: A date-time field that keeps the record for the time a lesson was created for eae of follow up
+
+    3. Enrollment table
+    This table is to keep tha records for those who enroll in a particular course to give them accessibility for the content. Below are the filed and thair relationships:
+        1. student: A foreign key that relates with the student in the users table that is in the users app
+        2. course: This is a foreign filed that relates with the course fieldin the course table in the courses app
+        3. enrolled at: This is a datefield that records the time a particular student enrolled for a given course
+
+    Templates
+        The templates are meant for the formulation of the appearance of the frontend that the user interacts with
+            1. Course_detail This template gives information about a particular course that a student enrolls
+
+
+    URLS
+        The urls for this app have been handled in urls.py in this app(courses)
+        there are the routers for the lessons and the courses
+
+    
+
+Profile_pics
+This directory keeps the profile photos that have been added by the users during the account setup
+
+COMMON FILES IN ALL THE APPS
+1. serializer.py 
+    These files allow for the serialization as well as deserilization to allow for there to be API endpoints.
+    Python code is converted into json format that can be hosted as a API endpoint
+
+2. Views.py
+    It is in this file that the viewsets are created
+
+3. models.py
+    These files allow for one to interact with the database as one gets to create tables as classes and the fields are reprsented as attributes for the class
+
+4. admin.py
+    It is in this file that models,/fileds are registered so that they are accessible by the superusers that are created. 
+    This allows for actions to be done in the backend using the admin  dashboard
+
+5. forms.py
+    Though not compulsory, I have these files in my apps as the forms allow for data collection using the templates in the frontend and have them in the backend
+
+6. urls.py
+    This is the file in whick the url paths are registered for browsing
+    There are some paths that are registered in the app, where by the app urls are added to the ain urls.py file to allow for accessiblity
+
+
+THE PROJECT OVERVIEW FILES
+The project directory is the elearning . It has the follolwing :
+
+    1. Tempates diretory
+        It us in this directory that i have created the base template. I have declared it a a global base template for all my templates that I have in y project
+
+    2. Settings.py
+        This is the file where i have all the installed apps for this entire project
+        It also has the authentication key and the authenticared users for the project
+        The templates in the various apps have been registerd in the settings.py file, eg, users/templates, enrollment/templates
+        THE DATABASE THAT HAS BEEN USED IS REGISTERED IN THIS FILE. 
+        For this project, I have used the db.sqlite3
+        
+
+        
+
+
+
+
+ 
 
 
 
