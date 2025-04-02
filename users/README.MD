@@ -187,7 +187,7 @@ THE PROJECT OVERVIEW FILES
 The project directory is the elearning . It has the follolwing :
 
     1. Tempates diretory
-        It us in this directory that i have created the base template. I have declared it a a global base template for all my templates that I have in y project
+        It us in this directory that i have created the base template. I have declared it a a global base template for all my templates that I have in my project
 
     2. Settings.py
         This is the file where i have all the installed apps for this entire project
@@ -195,7 +195,24 @@ The project directory is the elearning . It has the follolwing :
         The templates in the various apps have been registerd in the settings.py file, eg, users/templates, enrollment/templates
         THE DATABASE THAT HAS BEEN USED IS REGISTERED IN THIS FILE. 
         For this project, I have used the db.sqlite3
-        
+
+    3. Urls.py
+        This is te file into which all the url paths have been registered. The apps do have different urls that are addded/inluded into this file to allow for them to be accessible by the users
+        Below are the paths:
+            1. http://127.0.0.1:8000/api/ - Path to all the endpoints
+            2. path("users/", include("users.urls", namespace="users")),  
+    path("courses/", include("courses.urls", namespace="courses")),  
+
+    path('enrollments/', include('enrollments.urls')), 
+
+]
+            3. http://127.0.0.1:8000/ - path to the home page
+
+            4. http://127.0.0.1:8000/admin/ - path to access the admin panel
+
+
+
+
 
         
 
