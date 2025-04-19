@@ -14,8 +14,8 @@ from pathlib import Path
 from tempfile import template
 import os
 from datetime import timedelta
-from dotenv import load_dotenv 
-load_dotenv()
+
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,13 +26,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY =os.getenv("SECRET_KEY")
+SECRET_KEY ="#$fm7dv7r3u&tbll%vtbp=xa--(=*7swypv1!yk+t1s%$6+62b"
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG =os.getenv("DEBUG")
+DEBUG =True
 
-ALLOWED_HOSTS = ["njambievelyne.pythonanywhere.com"]
+ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'users.User'
 
